@@ -692,9 +692,10 @@ struct formatter {
         specs_.width, specs_.width_ref, ctx);
     fmt::internal::handle_dynamic_spec<fmt::internal::precision_checker>(
         specs_.precision, specs_.precision_ref, ctx);
-    using range_type = fmt::internal::output_range<typename FormatContext::iterator,
+    using arg_formatter = fmt::arg_formatter<
+                         typename FormatContext::iterator,
                          typename FormatContext::char_type>;
-    return visit_format_arg(arg_formatter<range_type>(ctx, nullptr, &specs_),
+    return visit_format_arg(arg_formatter(ctx, nullptr, &specs_),
                             basic_format_arg<FormatContext>(val));
   }
 
